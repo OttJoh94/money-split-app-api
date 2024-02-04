@@ -45,6 +45,9 @@ namespace EvenlyAPI.Database
 			   new UserGroupModel() { UserId = 3, GroupId = 2, Balance = 0 },
 			   new UserGroupModel() { UserId = 4, GroupId = 2, Balance = 0 }
 			   );
+
+			modelBuilder.Entity<ExpenseModel>().HasData(
+				new ExpenseModel() { ExpenseId = 1, Amount = 200, DateOfExpense = new DateTime(2023, 01, 01), Description = "Seeded expense", UserId = 1, GroupId = 1 });
 		}
 	}
 }

@@ -12,6 +12,6 @@ namespace EvenlyAPI.Models
 		public GroupModel? Group { get; set; }
 		[Column("balance", TypeName = "DECIMAL(10,2)")]
 		public decimal Balance { get; set; }
-		public List<ExpenseModel>? Expenses { get; set; }
+		public List<ExpenseModel> Expenses { get; set; } = new();
 	}
 }

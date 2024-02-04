@@ -41,7 +41,10 @@ namespace EvenlyAPI.Services
 
 		public UserGroupModel? GetById(int userId, int groupId)
 		{
-			return context.UserGroups.Include(u => u.User).Include(u => u.Group)
+			return context.UserGroups
+				.Include(u => u.User)
+				.Include(u => u.Group)
+				.Include(u => u.Expenses)
 				.Select(u => new UserGroupModel()
 				{
 					UserId = u.UserId,
@@ -56,7 +59,12 @@ namespace EvenlyAPI.Services
 					{
 						GroupId = u.GroupId,
 						GroupName = u.Group!.GroupName
-					}
+					},
+					Expenses = u.Expenses.Select(e => new ExpenseModel()
+					{
+						ExpenseId = e.ExpenseId,
+						Description = e.Description
+					}).ToList()
 				}).FirstOrDefault(u => u.UserId == userId && u.GroupId == groupId);
 		}
 
