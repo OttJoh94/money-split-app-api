@@ -7,7 +7,7 @@ namespace EvenlyAPI.Services
 		IEnumerable<UserGroupModel?> GetAll();
 		UserGroupModel? GetById(int userId, int groupId);
 		IEnumerable<UserGroupModel?> Add(UserGroupModel newUserGroup);
-		UserGroupModel? Update(int userId, int groupId, UserGroupModel updatedUserGroup);
+		UserGroupModel? UpdateBalance(int userId, int groupId, decimal newBalance);
 		void Delete(int userId, int groupId);
 	}
 }

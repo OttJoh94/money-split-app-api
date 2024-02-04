@@ -29,9 +29,9 @@ namespace EvenlyAPI.Controllers
 		}
 
 		[HttpPut]
-		public ActionResult<UserGroupModel> Put(int userId, int groupId, UserGroupModel updatedUserGroup)
+		public ActionResult<UserGroupModel> Put(int userId, int groupId, decimal newBalance)
 		{
-			return Ok(repo.Update(userId, groupId, updatedUserGroup));
+			return Ok(repo.UpdateBalance(userId, groupId, newBalance));
 		}
 
 		[HttpDelete]

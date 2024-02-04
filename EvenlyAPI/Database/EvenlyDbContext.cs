@@ -24,7 +24,7 @@ namespace EvenlyAPI.Database
 				.HasOne(e => e.UserGroup)
 				.WithMany(e => e.Expenses)
 				.HasForeignKey(e => new { e.UserId, e.GroupId })
-				.OnDelete(DeleteBehavior.NoAction);
+				.OnDelete(DeleteBehavior.Cascade);
 
 			modelBuilder.Entity<UserModel>().HasData(
 				new UserModel() { UserId = 1, Name = "Otto" },

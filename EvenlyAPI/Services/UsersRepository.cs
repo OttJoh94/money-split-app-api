@@ -28,6 +28,7 @@ namespace EvenlyAPI.Services
 			{
 				context.Users.Remove(userToRemove);
 				context.SaveChanges();
+				//TODO: Crashes if user has expense connected to it.
 			}
 		}
 

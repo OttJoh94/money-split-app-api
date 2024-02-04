@@ -68,22 +68,16 @@ namespace EvenlyAPI.Services
 				}).FirstOrDefault(u => u.UserId == userId && u.GroupId == groupId);
 		}
 
-		public UserGroupModel? Update(int userId, int groupId, UserGroupModel updatedUserGroup)
+		public UserGroupModel? UpdateBalance(int userId, int groupId, decimal newBalance)
 		{
 			UserGroupModel? currentUserGroup = GetById(userId, groupId);
 			if (currentUserGroup != null)
 			{
-				currentUserGroup.Balance = updatedUserGroup.Balance;
+				currentUserGroup.Balance += newBalance;
+				context.Entry(currentUserGroup).State = EntityState.Modified;
+				context.SaveChanges();
 
-				//TODO: Här har vi ett error: affectedRows blir 0
-				int affectedRows = context.SaveChanges();
-				if (affectedRows > 0)
-				{
-					// Ändringarna sparades framgångsrikt
-				}
 			}
-
-
 			return GetById(userId, groupId);
 		}
 	}

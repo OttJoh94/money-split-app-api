@@ -1,5 +1,6 @@
 ﻿using EvenlyAPI.Database;
 using EvenlyAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EvenlyAPI.Services
 {
@@ -45,9 +46,12 @@ namespace EvenlyAPI.Services
 				currentExpense.DateOfExpense = updatedExpense.DateOfExpense;
 				currentExpense.UserId = updatedExpense.UserId;
 				currentExpense.GroupId = updatedExpense.GroupId;
+
+				context.Entry(currentExpense).State = EntityState.Modified;
+				context.SaveChanges();
 			}
 
-			return currentExpense;
+			return GetById(id);
 		}
 	}
 }
