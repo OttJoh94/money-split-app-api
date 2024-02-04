@@ -17,6 +17,7 @@ builder.Services.AddDbContext<EvenlyDbContext>(options => options.UseSqlServer(c
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IGroupsRepository, GroupsRepository>();
 builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
+builder.Services.AddScoped<IUserGroupsRepository, UserGroupsRepository>();
 
 
 var app = builder.Build();
