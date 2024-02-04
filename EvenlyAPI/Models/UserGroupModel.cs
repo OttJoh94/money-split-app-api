@@ -6,12 +6,12 @@ namespace EvenlyAPI.Models
 	{
 		[Column("user_id")]
 		public int UserId { get; set; }
-		public UserModel User { get; set; } = null!;
+		public UserModel? User { get; set; }
 		[Column("group_id")]
 		public int GroupId { get; set; }
-		public GroupModel Group { get; set; } = null!;
+		public GroupModel? Group { get; set; }
 		[Column("balance", TypeName = "DECIMAL(10,2)")]
 		public decimal Balance { get; set; }
-		public virtual List<ExpenseModel> Expenses { get; set; } = null!;
+		public List<ExpenseModel>? Expenses { get; set; }
 	}
 }

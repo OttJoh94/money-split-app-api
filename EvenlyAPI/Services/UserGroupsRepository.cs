@@ -50,12 +50,12 @@ namespace EvenlyAPI.Services
 					User = new UserModel()
 					{
 						UserId = u.UserId,
-						Name = u.User.Name,
+						Name = u.User!.Name,
 					},
 					Group = new GroupModel()
 					{
 						GroupId = u.GroupId,
-						GroupName = u.Group.GroupName
+						GroupName = u.Group!.GroupName
 					}
 				}).FirstOrDefault(u => u.UserId == userId && u.GroupId == groupId);
 		}
@@ -66,10 +66,17 @@ namespace EvenlyAPI.Services
 			if (currentUserGroup != null)
 			{
 				currentUserGroup.Balance = updatedUserGroup.Balance;
-				context.SaveChanges();
+
+				//TODO: Här har vi ett error: affectedRows blir 0
+				int affectedRows = context.SaveChanges();
+				if (affectedRows > 0)
+				{
+					// Ändringarna sparades framgångsrikt
+				}
 			}
 
-			return currentUserGroup;
+
+			return GetById(userId, groupId);
 		}
 	}
 }
