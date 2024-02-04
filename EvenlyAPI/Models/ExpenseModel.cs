@@ -18,6 +18,6 @@ namespace EvenlyAPI.Models
 		public int UserId { get; set; }
 		[Column("group_id")]
 		public int GroupId { get; set; }
-		public UserGroupModel UserGroup { get; set; } = null!;
+		public UserGroupModel? UserGroup { get; set; }
 	}
 }
