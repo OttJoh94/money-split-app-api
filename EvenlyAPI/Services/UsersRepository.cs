@@ -18,12 +18,12 @@ namespace EvenlyAPI.Services
 			context.Users.Add(newUser);
 			context.SaveChanges();
 
-			return context.Users;
+			return GetAll();
 		}
 
 		public void Delete(int id)
 		{
-			UserModel? userToRemove = context.Users.FirstOrDefault(u => u.UserId == id);
+			UserModel? userToRemove = GetById(id);
 			if (userToRemove != null)
 			{
 				context.Users.Remove(userToRemove);
@@ -43,7 +43,7 @@ namespace EvenlyAPI.Services
 
 		public UserModel? Update(int id, UserModel updatedUser)
 		{
-			UserModel? currentUser = context.Users.FirstOrDefault(u => u.UserId == id);
+			UserModel? currentUser = GetById(id);
 
 			if (currentUser != null)
 			{
