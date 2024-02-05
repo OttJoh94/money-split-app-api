@@ -4,6 +4,7 @@ using EvenlyAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvenlyAPI.Migrations
 {
     [DbContext(typeof(EvenlyDbContext))]
-    partial class EvenlyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205095448_addDeleteBehaviors")]
+    partial class addDeleteBehaviors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

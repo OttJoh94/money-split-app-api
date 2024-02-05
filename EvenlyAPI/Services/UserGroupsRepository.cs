@@ -10,8 +10,12 @@ namespace EvenlyAPI.Services
 
 		public IEnumerable<UserGroupModel?> Add(UserGroupModel newUserGroup)
 		{
-			context.UserGroups.Add(newUserGroup);
-			context.SaveChanges();
+			//Checks if there already is a UserGroup with that name
+			if (context.UserGroups.FirstOrDefault(u => u.UserId == newUserGroup.UserId && u.GroupId == newUserGroup.GroupId) == null)
+			{
+				context.UserGroups.Add(newUserGroup);
+				context.SaveChanges();
+			}
 
 			return GetAll();
 		}
@@ -63,7 +67,11 @@ namespace EvenlyAPI.Services
 					Expenses = u.Expenses.Select(e => new ExpenseModel()
 					{
 						ExpenseId = e.ExpenseId,
-						Description = e.Description
+						Description = e.Description,
+						Amount = e.Amount,
+						DateOfExpense = e.DateOfExpense,
+						UserId = e.UserId,
+						GroupId = e.GroupId,
 					}).ToList()
 				}).FirstOrDefault(u => u.UserId == userId && u.GroupId == groupId);
 		}
