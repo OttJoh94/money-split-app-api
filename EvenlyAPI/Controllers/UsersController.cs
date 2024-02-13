@@ -11,33 +11,33 @@ namespace EvenlyAPI.Controllers
         private readonly IUsersRepository repo = repo;
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserModel>> Get()
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetAsync()
         {
-            return Ok(repo.GetAll());
+            return Ok(await repo.GetAllAsync());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<UserModel> Get(int id)
+        public async Task<ActionResult<UserModel>> GetAsync(int id)
         {
-            return Ok(repo.GetById(id));
+            return Ok(await repo.GetByIdAsync(id));
         }
 
         [HttpPost]
-        public ActionResult<IEnumerable<UserModel>> Post(UserModel newUser)
+        public async Task<ActionResult<IEnumerable<UserModel>>> PostAsync(UserModel newUser)
         {
-            return Ok(repo.Add(newUser));
+            return Ok(await repo.AddAsync(newUser));
         }
 
         [HttpPut]
-        public ActionResult<UserModel> Put(int id, UserModel newUser)
+        public async Task<ActionResult<UserModel>> PutAsync(int id, UserModel newUser)
         {
-            return Ok(repo.Update(id, newUser));
+            return Ok(await repo.UpdateAsync(id, newUser));
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
-            repo.Delete(id);
+            await repo.DeleteAsync(id);
             return Ok();
         }
     }

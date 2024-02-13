@@ -4,41 +4,41 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvenlyAPI.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class GroupsController(IGroupsRepository repo) : ControllerBase
-	{
-		private readonly IGroupsRepository repo = repo;
+    [Route("api/[controller]")]
+    [ApiController]
+    public class GroupsController(IGroupsRepository repo) : ControllerBase
+    {
+        private readonly IGroupsRepository repo = repo;
 
-		[HttpGet]
-		public ActionResult<IEnumerable<GroupModel>> Get()
-		{
-			return Ok(repo.GetAll());
-		}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GroupModel>>> GetAsync()
+        {
+            return Ok(await repo.GetAllAsync());
+        }
 
-		[HttpGet("{id}")]
-		public ActionResult<GroupModel> Get(int id)
-		{
-			return Ok(repo.GetById(id));
-		}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GroupModel>> GetAsync(int id)
+        {
+            return Ok(await repo.GetByIdAsync(id));
+        }
 
-		[HttpPost]
-		public ActionResult<IEnumerable<GroupModel>> Post(GroupModel newGroup)
-		{
-			return Ok(repo.Add(newGroup));
-		}
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<GroupModel>>> PostAsync(GroupModel newGroup)
+        {
+            return Ok(await repo.AddAsync(newGroup));
+        }
 
-		[HttpPut]
-		public ActionResult<GroupModel> Put(int id, GroupModel newGroup)
-		{
-			return Ok(repo.Update(id, newGroup));
-		}
+        [HttpPut]
+        public async Task<ActionResult<GroupModel>> PutAsync(int id, GroupModel newGroup)
+        {
+            return Ok(await repo.UpdateAsync(id, newGroup));
+        }
 
-		[HttpDelete]
-		public ActionResult Delete(int id)
-		{
-			repo.Delete(id);
-			return Ok();
-		}
-	}
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await repo.DeleteAsync(id);
+            return Ok();
+        }
+    }
 }

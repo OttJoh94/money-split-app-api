@@ -67,6 +67,15 @@ namespace EvenlyAPI.Migrations
                             Description = "Seeded expense",
                             GroupId = 1,
                             UserId = 1
+                        },
+                        new
+                        {
+                            ExpenseId = 2,
+                            Amount = 500m,
+                            DateOfExpense = new DateTime(2023, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Another seeded expense",
+                            GroupId = 2,
+                            UserId = 3
                         });
                 });
 
@@ -97,7 +106,7 @@ namespace EvenlyAPI.Migrations
                         new
                         {
                             GroupId = 2,
-                            GroupName = "Familjen Johansson"
+                            GroupName = "Familjen"
                         });
                 });
 

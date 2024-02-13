@@ -1,52 +1,53 @@
 ﻿using EvenlyAPI.Database;
 using EvenlyAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EvenlyAPI.Services
 {
-	public class GroupsRepository(EvenlyDbContext context) : IGroupsRepository
-	{
-		private readonly EvenlyDbContext context = context;
+    public class GroupsRepository(EvenlyDbContext context) : IGroupsRepository
+    {
+        private readonly EvenlyDbContext context = context;
 
-		public IEnumerable<GroupModel> Add(GroupModel newGroup)
-		{
-			context.Groups.Add(newGroup);
-			context.SaveChanges();
+        public async Task<IEnumerable<GroupModel>> AddAsync(GroupModel newGroup)
+        {
+            await context.Groups.AddAsync(newGroup);
+            await context.SaveChangesAsync();
 
-			return GetAll();
-		}
+            return await GetAllAsync();
+        }
 
-		public void Delete(int id)
-		{
-			GroupModel? group = GetById(id);
+        public async Task DeleteAsync(int id)
+        {
+            GroupModel? group = await GetByIdAsync(id);
 
-			if (group != null)
-			{
-				context.Groups.Remove(group);
-				context.SaveChanges();
-			}
-		}
+            if (group != null)
+            {
+                context.Groups.Remove(group);
+                await context.SaveChangesAsync();
+            }
+        }
 
-		public IEnumerable<GroupModel> GetAll()
-		{
-			return context.Groups;
-		}
+        public async Task<IEnumerable<GroupModel>> GetAllAsync()
+        {
+            return await context.Groups.ToListAsync();
+        }
 
-		public GroupModel? GetById(int id)
-		{
-			return context.Groups.FirstOrDefault(g => g.GroupId == id);
-		}
+        public async Task<GroupModel?> GetByIdAsync(int id)
+        {
+            return await context.Groups.FirstOrDefaultAsync(g => g.GroupId == id);
+        }
 
-		public GroupModel? Update(int id, GroupModel updatedGroup)
-		{
-			GroupModel? currentGroup = GetById(id);
+        public async Task<GroupModel?> UpdateAsync(int id, GroupModel updatedGroup)
+        {
+            GroupModel? currentGroup = await GetByIdAsync(id);
 
-			if (currentGroup != null)
-			{
-				currentGroup.GroupName = updatedGroup.GroupName;
-				context.SaveChanges();
-			}
+            if (currentGroup != null)
+            {
+                currentGroup.GroupName = updatedGroup.GroupName;
+                await context.SaveChangesAsync();
+            }
 
-			return currentGroup;
-		}
-	}
+            return currentGroup;
+        }
+    }
 }

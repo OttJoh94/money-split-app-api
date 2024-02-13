@@ -83,7 +83,8 @@ namespace EvenlyAPI.Migrations
                         name: "FK_Expenses_UserGroups_user_id_group_id",
                         columns: x => new { x.user_id, x.group_id },
                         principalTable: "UserGroups",
-                        principalColumns: new[] { "user_id", "group_id" });
+                        principalColumns: new[] { "user_id", "group_id" },
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -92,7 +93,7 @@ namespace EvenlyAPI.Migrations
                 values: new object[,]
                 {
                     { 1, "Simrishamnsgatan" },
-                    { 2, "Familjen Johansson" }
+                    { 2, "Familjen" }
                 });
 
             migrationBuilder.InsertData(
@@ -116,6 +117,15 @@ namespace EvenlyAPI.Migrations
                     { 1, 2, 0m },
                     { 2, 3, 0m },
                     { 2, 4, 0m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Expenses",
+                columns: new[] { "expense_id", "amount", "date_of_expense", "description", "group_id", "user_id" },
+                values: new object[,]
+                {
+                    { 1, 200m, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Seeded expense", 1, 1 },
+                    { 2, 500m, new DateTime(2023, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Another seeded expense", 2, 3 }
                 });
 
             migrationBuilder.CreateIndex(

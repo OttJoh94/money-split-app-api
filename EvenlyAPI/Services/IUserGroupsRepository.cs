@@ -2,12 +2,12 @@
 
 namespace EvenlyAPI.Services
 {
-	public interface IUserGroupsRepository
-	{
-		IEnumerable<UserGroupModel?> GetAll();
-		UserGroupModel? GetById(int userId, int groupId);
-		IEnumerable<UserGroupModel?> Add(UserGroupModel newUserGroup);
-		UserGroupModel? UpdateBalance(int userId, int groupId, decimal newBalance);
-		void Delete(int userId, int groupId);
-	}
+    public interface IUserGroupsRepository
+    {
+        Task<IEnumerable<UserGroupModel?>> GetAllAsync();
+        Task<UserGroupModel?> GetByIdAsync(int userId, int groupId);
+        Task<IEnumerable<UserGroupModel?>> AddAsync(UserGroupModel newUserGroup);
+        Task<UserGroupModel?> UpdateBalanceAsync(int userId, int groupId, decimal newBalance);
+        Task DeleteAsync(int userId, int groupId);
+    }
 }

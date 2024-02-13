@@ -45,7 +45,7 @@ namespace EvenlyAPI.Database
 
             modelBuilder.Entity<GroupModel>().HasData(
                 new GroupModel() { GroupId = 1, GroupName = "Simrishamnsgatan" },
-                new GroupModel() { GroupId = 2, GroupName = "Familjen Johansson" }
+                new GroupModel() { GroupId = 2, GroupName = "Familjen" }
                 );
 
             modelBuilder.Entity<UserGroupModel>().HasData(
@@ -57,7 +57,8 @@ namespace EvenlyAPI.Database
                );
 
             modelBuilder.Entity<ExpenseModel>().HasData(
-                new ExpenseModel() { ExpenseId = 1, Amount = 200, DateOfExpense = new DateTime(2023, 01, 01), Description = "Seeded expense", UserId = 1, GroupId = 1 });
+                new ExpenseModel() { ExpenseId = 1, Amount = 200, DateOfExpense = new DateTime(2023, 01, 01), Description = "Seeded expense", UserId = 1, GroupId = 1 },
+                new ExpenseModel() { ExpenseId = 2, Amount = 500, DateOfExpense = new DateTime(2023, 02, 02), Description = "Another seeded expense", UserId = 3, GroupId = 2 });
         }
     }
 }

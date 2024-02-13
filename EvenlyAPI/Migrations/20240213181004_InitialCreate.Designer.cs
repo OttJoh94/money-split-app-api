@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EvenlyAPI.Migrations
 {
     [DbContext(typeof(EvenlyDbContext))]
-    [Migration("20240204201240_SeedExpense")]
-    partial class SeedExpense
+    [Migration("20240213181004_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,15 @@ namespace EvenlyAPI.Migrations
                             Description = "Seeded expense",
                             GroupId = 1,
                             UserId = 1
+                        },
+                        new
+                        {
+                            ExpenseId = 2,
+                            Amount = 500m,
+                            DateOfExpense = new DateTime(2023, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Another seeded expense",
+                            GroupId = 2,
+                            UserId = 3
                         });
                 });
 
@@ -100,7 +109,7 @@ namespace EvenlyAPI.Migrations
                         new
                         {
                             GroupId = 2,
-                            GroupName = "Familjen Johansson"
+                            GroupName = "Familjen"
                         });
                 });
 
@@ -203,7 +212,7 @@ namespace EvenlyAPI.Migrations
                     b.HasOne("EvenlyAPI.Models.UserGroupModel", "UserGroup")
                         .WithMany("Expenses")
                         .HasForeignKey("UserId", "GroupId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("UserGroup");
